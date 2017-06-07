@@ -9,7 +9,7 @@ public class Assignment3 {
     private static double [] xVals;
     private static double [] yVals;
     private static double [][] functionOf;
-    private static String TAB = "\t\t";
+    private static String TAB = "\t\t\t";
 
     public static void main(String[] args) {
         readFile(args[0]);
@@ -17,7 +17,24 @@ public class Assignment3 {
         for(int i = 0; i < functionOf.length; ++i) {
             functionOf[i] = new double[functionOf.length - i];
         }
+        dividedDifference();
         printTable();
+        printInterpolatingPolynomial();
+        printSimplifiedPolynomial();
+    }
+
+    private static void dividedDifference() {
+        for(int i = 1; i < yVals.length; ++i) {
+            functionOf[0][i - 1] = yVals[i - 1] - yVals[i];
+            functionOf[0][i - 1] /= (xVals[i - 1] - xVals[i]);
+        }
+        for(int i = 1; i < functionOf.length; ++i) {
+            for(int j = 1; j < functionOf[i - 1].length; ++j) {
+                functionOf[i][j - 1] = functionOf[i - 1][j - 1] - functionOf[i - 1][j];
+                // divide by xvals
+                functionOf[i][j - 1] /= (xVals[j - 1] - xVals[j + i]);
+            }
+        }
     }
 
     private static void readFile(String arg) {
@@ -85,15 +102,23 @@ public class Assignment3 {
         System.out.println();
 
         for(int i = 0; i < xVals.length; ++i) {
-            System.out.println(xVals[i] + TAB + yVals[i]);
+            System.out.print(xVals[i] + TAB + yVals[i]);
+            for(int j = 0; j < i; ++j) {
+                System.out.print(TAB + functionOf[j][i - j - 1]);
+            }
+            System.out.println();
         }
     }
 
     public static void printInterpolatingPolynomial() {
+        System.out.println();
+        System.out.println("Interpolating polynomial is: \n");
         // TODO
     }
 
     public static void printSimplifiedPolynomial() {
+        System.out.println();
+        System.out.println("Simplified polynomial is: \n");
         // TODO
     }
 }

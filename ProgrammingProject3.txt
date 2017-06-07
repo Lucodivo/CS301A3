@@ -7,18 +7,12 @@ difference table and the interpolating polynomial as shown below:
 x       f[]    f[ , ]    f[ , , ]  f[ , , , ]
 
 
-1       3                       
-
-                1/2    
-
+1       3
+                1/2
 3/2     13/4                1/3
-
                 1/6					-2
-               					
  0      3   			   -5/3
-
                -2/3
-
  2      5/3  
 
 Interpolating polynomial is:
