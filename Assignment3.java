@@ -8,10 +8,15 @@ import java.io.IOException;
 public class Assignment3 {
     private static double [] xVals;
     private static double [] yVals;
+    private static double [][] functionOf;
     private static String TAB = "\t\t";
 
     public static void main(String[] args) {
         readFile(args[0]);
+        functionOf = new double[xVals.length - 1][];
+        for(int i = 0; i < functionOf.length; ++i) {
+            functionOf[i] = new double[functionOf.length - i];
+        }
         printTable();
     }
 
@@ -82,5 +87,13 @@ public class Assignment3 {
         for(int i = 0; i < xVals.length; ++i) {
             System.out.println(xVals[i] + TAB + yVals[i]);
         }
+    }
+
+    public static void printInterpolatingPolynomial() {
+        // TODO
+    }
+
+    public static void printSimplifiedPolynomial() {
+        // TODO
     }
 }
