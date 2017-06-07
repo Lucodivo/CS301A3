@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Created by Connor on 6/2/2017.
@@ -10,6 +12,7 @@ public class Assignment3 {
     private static double [] yVals;
     private static double [][] functionOf;
     private static String TAB = "\t\t\t";
+    private static NumberFormat formatter = new DecimalFormat("#0.0000");
 
     public static void main(String[] args) {
         readFile(args[0]);
@@ -93,18 +96,17 @@ public class Assignment3 {
     }
 
     public static void printTable() {
-        System.out.print("x");
-        String commas = "";
+        System.out.print("x\t");
+        int commas = 0;
         for(int i = 0; i < xVals.length; ++i) {
-            System.out.print(TAB + "f[" + commas + "]");
-            commas = commas + ",";
+            System.out.print(TAB + "f[" + commas++ + "]");
         }
         System.out.println();
 
         for(int i = 0; i < xVals.length; ++i) {
-            System.out.print(xVals[i] + TAB + yVals[i]);
+            System.out.print(formatter.format(xVals[i]) + TAB + formatter.format(yVals[i]));
             for(int j = 0; j < i; ++j) {
-                System.out.print(TAB + functionOf[j][i - j - 1]);
+                System.out.print(TAB + formatter.format(functionOf[j][i - j - 1]));
             }
             System.out.println();
         }
