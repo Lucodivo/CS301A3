@@ -115,7 +115,25 @@ public class Assignment3 {
     public static void printInterpolatingPolynomial() {
         System.out.println();
         System.out.println("Interpolating polynomial is: \n");
-        // TODO
+        String xString = "";
+        System.out.print(formatter.format(yVals[0]));
+        for(int i = 0; i < functionOf.length; ++i) {
+            double coefficient = functionOf[i][0];
+            if(coefficient < 0) {
+                System.out.print(" - " + formatter.format(Math.abs(coefficient)));
+            } else {
+                System.out.print(" + " + formatter.format(coefficient));
+            }
+            if(xVals[i] < 0) {
+                xString += "(x+" + formatter.format(Math.abs(xVals[i])) + ")";
+            } else  if(xVals[i] > 0) {
+                xString += "(x-" + formatter.format(Math.abs(xVals[i])) + ")";
+            } else {
+                xString += "x";
+            }
+            System.out.print(xString);
+        }
+        System.out.println();
     }
 
     public static void printSimplifiedPolynomial() {
