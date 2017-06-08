@@ -139,6 +139,33 @@ public class Assignment3 {
     public static void printSimplifiedPolynomial() {
         System.out.println();
         System.out.println("Simplified polynomial is: \n");
-        // TODO
+        double [] finalVal = new double[functionOf.length + 1];
+        double [] interVal = new double[functionOf.length + 1];
+        finalVal[0] = yVals[0];
+        interVal[0] = 1;
+        for(int i = 0; i < functionOf.length; ++i) {
+            double [] higherOrderVal = new double[interVal.length];
+            // acquire all values that will be a result of previous values multiplied by x
+            for(int j = interVal.length - 1; j > 0; --j) {
+                higherOrderVal[j] = interVal[j - 1];
+            }
+            // multiply by the coefficient in (x - c) and add the higher orders from previous loop
+            for(int j = 0; j < interVal.length; ++j) {
+                interVal[j] *= (-1 * xVals[i]);
+                interVal[j] += higherOrderVal[j];
+            }
+            // add intermediate values to final result
+            for(int j = 0; j < interVal.length; ++j) {
+                finalVal[j] += functionOf[i][0] * interVal[j];
+            }
+        }
+        for(int i = finalVal.length - 1; i > 0; --i) {
+            if(finalVal[i - 1] > 0) {
+                System.out.print(formatter.format(Math.abs(finalVal[i])) + "x^" + i + " + ");
+            } else if(finalVal[i - 1] < 0) {
+                System.out.print(formatter.format(Math.abs(finalVal[i])) + "x^" + i + " - ");
+            }
+        }
+        System.out.println(formatter.format(Math.abs(finalVal[0])));
     }
 }
